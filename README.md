@@ -1,6 +1,6 @@
-#Deep Translate API
+Deep Translate API
 
-#All you gotta do is: docker-compose build
-#Then docker-compose up
+All you gotta do is: docker-compose build
+Then docker-compose up
 
-#come on now
+come on now
