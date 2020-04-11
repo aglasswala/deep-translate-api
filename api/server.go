@@ -9,8 +9,8 @@ import (
 func SetupRouter() *gin.Engine {
 	router := gin.Default()
 
-	router.GET("/translate", translate.Translate)
-	router.GET("/detect", detection.Detect)
+	router.POST("/translate", translate.Translate)
+	router.POST("/detect", detection.Detect)
 
 	return router
 }

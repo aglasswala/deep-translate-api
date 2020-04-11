@@ -1,0 +1,10 @@
+version: "3"
+
+services: 
+  deeptranslate-api: 
+    build: .
+    command: go run main.go
+    volumes:
+      - .:/app
+    ports:
+      - "8080:8080"
