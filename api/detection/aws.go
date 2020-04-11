@@ -2,6 +2,7 @@ package detection
 
 import (
 	"io"
+	"log"
 	"os"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -63,12 +64,14 @@ func RekognizeObjects(awsSession *session.Session, bucket string, key string) (*
 func DetectObjects(file io.Reader, filename string) (*rekognition.DetectLabelsOutput, error) {
 	err := godotenv.Load()
 	if err != nil {
+		log.Println("ERROR:", err)
 		return nil, err
 	}
 
 	// Create a new AWS Session
 	awsSession, err := NewAWSSession()
 	if err != nil {
+		log.Println("ERROR:", err)
 		return nil, err
 	}
 
@@ -76,12 +79,14 @@ func DetectObjects(file io.Reader, filename string) (*rekognition.DetectLabelsOu
 	bucket := os.Getenv("AWS_S3_BUCKET")
 	err = UploadFileToS3(bucket, filename, file, awsSession)
 	if err != nil {
+		log.Println("ERROR:", err)
 		return nil, err
 	}
 
 	// Detect the objects
 	result, err := RekognizeObjects(awsSession, bucket, filename)
 	if err != nil {
+		log.Println("ERROR:", err)
 		return nil, err
 	}
 
