@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/rekognition"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
-	"github.com/joho/godotenv"
 )
 
 func NewAWSSession() (*session.Session, error) {
@@ -62,12 +61,6 @@ func RekognizeObjects(awsSession *session.Session, bucket string, key string) (*
 }
 
 func DetectObjects(file io.Reader, filename string) (*rekognition.DetectLabelsOutput, error) {
-	err := godotenv.Load()
-	if err != nil {
-		log.Println("ERROR:", err)
-		return nil, err
-	}
-
 	// Create a new AWS Session
 	awsSession, err := NewAWSSession()
 	if err != nil {
